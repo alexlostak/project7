@@ -2,6 +2,8 @@ package assignment7;
 
 import java.io.*;
 import java.net.*;
+import java.util.LinkedList;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -9,8 +11,8 @@ import java.awt.event.*;
 public class ChatClient {
 	private JTextArea incoming;
 	private JTextField outgoing;
-	private BufferedReader reader;
-	private PrintWriter writer;
+	private ObjectInputStream reader;
+	private ObjectOutputStream writer;
 	
 
 	public void run() throws Exception {
@@ -43,19 +45,27 @@ public class ChatClient {
 	private void setUpNetworking() throws Exception {
 		@SuppressWarnings("resource")
 		Socket sock = new Socket("127.0.0.1", 4242);
-		//System.out.println("Created socket");
-		InputStreamReader streamReader = new InputStreamReader(sock.getInputStream());
-		reader = new BufferedReader(streamReader);
-		writer = new PrintWriter(sock.getOutputStream());
-		System.out.println("networking established");
+		ObjectOutputStream outToServer = new ObjectOutputStream(sock.getOutputStream());
+		writer = outToServer;
+		ObjectInputStream inFromServer = new ObjectInputStream(sock.getInputStream());
+		reader = inFromServer;
 		Thread readerThread = new Thread(new IncomingReader());
 		readerThread.start();
 	}
 
 	class SendButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
-			writer.println(outgoing.getText());
-			writer.flush();
+			
+			Message outgoingMsg = new Message(1, outgoing.getText());
+			ObjectOutputStream w = writer;
+			try {
+				writer.writeObject(outgoingMsg);
+				writer.flush();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//writer.println(outgoing.getText());
 			outgoing.setText("");
 			outgoing.requestFocus();
 		}
@@ -71,14 +81,19 @@ public class ChatClient {
 
 	class IncomingReader implements Runnable {
 		public void run() {
-			String message;
+			Message message;
 			try {
-				while ((message = reader.readLine()) != null) {
-					
-						incoming.append(message + "\n");
+				//while ((message = (Message) reader.readObject()) != null) {
+				while (true) {
+				message = (Message) reader.readObject();
+						System.out.println("made it");
+						incoming.append(message.content + "\n");
 				}
 			} catch (IOException ex) {
 				ex.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 	}
