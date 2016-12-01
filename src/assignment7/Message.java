@@ -11,6 +11,10 @@ public class Message implements Serializable{
 	public Message(int type, String content) {
 		this.type = type;
 		this.recipients = new ArrayList<Integer>();
+		Integer Client1 = 5;
+		recipients.add(Client1);
+		Client1 = 1;
+		recipients.add(Client1);
 		this.content = content;
 		return;
 		

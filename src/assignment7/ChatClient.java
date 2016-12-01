@@ -306,6 +306,10 @@ public class ChatClient extends Application {
 				//while ((message = (Message) reader.readObject()) != null) {
 				while (true) {
 				message = (Message) reader.readObject();
+				//see recipients in message
+				//check if window open with those recipients
+					//if open, update it
+					//if not open new window and update it
 						incoming.appendText(message.content + "\n");
 				}
 			} catch (IOException ex) {
