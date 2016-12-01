@@ -30,9 +30,6 @@ public class ChatServer {
 		@SuppressWarnings("resource")
 		ServerSocket serverSock = new ServerSocket(4242);
 		chatGroups.add(allClients);
-		//launch four clients
-		
-		
 		
 		while (true) {
 			Socket clientSocket = serverSock.accept();
@@ -156,8 +153,12 @@ public class ChatServer {
 			ArrayList<Socket> idSockets = new ArrayList<Socket>();
 			for (Integer i : clientIds) {
 				Socket idSocket = serverClientSockets.get(i);
-				idSockets.add(idSocket);
+				if (idSocket != null)
+					idSockets.add(idSocket);
+				
 			}
+//			if (idSockets.size() == 0)
+//				return null;
 			return idSockets;
 		}
 		
@@ -183,11 +184,15 @@ public class ChatServer {
 					ArrayList<Socket> idSockets = idToSockets(message.recipients);
 					//find chat group with those sockets
 					ChatGroup g;
-					if (idSockets == null)
+					if (idSockets == null) {
 						g = allClients;
+					}
 					else {
-						if (idSockets.contains(sock) == false)
+						if (idSockets.contains(sock) == false) {
 							idSockets.add(sock);
+							message.recipients.add(clientID);
+						}
+							
 						g = findChatGroup(new ChatGroup(idSockets));
 					}
 					//notify that ChatGroup
