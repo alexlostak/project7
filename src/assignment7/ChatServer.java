@@ -181,6 +181,7 @@ public class ChatServer {
 						//search list of chat groups for one that has all of those sockets that 
 						//the person wants to deliver the message to
 					//take list of recipients and convert to sockets
+					
 					ArrayList<Socket> idSockets = idToSockets(message.recipients);
 					//find chat group with those sockets
 					ChatGroup g;
