@@ -1,3 +1,14 @@
+/* ChatRoom
+ * EE422C Project 7 submission by
+ * Alex Lostak
+ * ajl3287
+ * 16460
+ * Jonah Harris
+ * jlh6487
+ * 16455
+ * Slip days used: 1
+ * Fall 2016
+ */
 package assignment7;
 
 import java.io.IOException;
@@ -113,6 +124,7 @@ public class ChatWindow extends Stage {
         this.setWidth(primaryScreenBounds.getWidth()/2);
         this.setHeight(primaryScreenBounds.getHeight()/2);
 		Scene myScene = new Scene(center, primaryScreenBounds.getWidth()/2, primaryScreenBounds.getHeight()/2);
+		//myScene.setUserAgentStylesheet("DarkTheme.css");
 		this.setScene(myScene);
         this.show();
 

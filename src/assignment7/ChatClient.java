@@ -1,3 +1,16 @@
+/* ChatRoom
+ * EE422C Project 7 submission by
+ * Alex Lostak
+ * ajl3287
+ * 16460
+ * Jonah Harris
+ * jlh6487
+ * 16455
+ * Slip days used: 1
+ * Fall 2016
+ */
+
+
 package assignment7;
 
 import java.awt.event.ActionListener;
@@ -284,6 +297,7 @@ public class ChatClient extends Application {
 	    selection.setTitle("Chats");
 	    Scene scene = new Scene(chatSelect, primaryScreenBounds2.getWidth()/2, primaryScreenBounds2.getHeight()/2);
 	    scene.setFill(javafx.scene.paint.Color.ANTIQUEWHITE);
+	    //scene.setUserAgentStylesheet("DarkTheme.css");
 	    selection.setScene(scene);
 	    selection.show();
 	}

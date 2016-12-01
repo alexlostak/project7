@@ -1,0 +1,11 @@
+Team Plan
+Alex Lostak ajl3287
+Jonah Harris jlh6487
+
+Github URL: https://github.com/alexlostak/project7 
+
+Alex Lostak:
+	Alex focused mainly on the logic and backend portion of this project. This included adding the ability for the server and client to send objects back and forth instead of just characters. Alex also created the ChatGroup functionality and Message class in order for the client and server to swap information more efficiently and provide clients the ability to talk in one on one and group chats.
+
+Jonah Harris:
+	Jonah focused on the front end portion of this project. This included building the window for the Chat in JavaFX as well as Creating the launching window for clients to decide who they would like to talk to. Jonah also helped implement the ChatWindow class and helped create the way users were able to export what hey wanted to send their message content to in the message object.
